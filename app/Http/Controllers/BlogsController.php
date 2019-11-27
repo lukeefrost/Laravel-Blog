@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Blog;
 use Storage;
@@ -16,10 +15,8 @@ class BlogsController extends Controller
     public function index()
     {
         $blogs = Blog::all();
-
         return view('blogs.index', ['blogs' => $blogs]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +26,6 @@ class BlogsController extends Controller
     {
         return view('blogs.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -39,18 +35,14 @@ class BlogsController extends Controller
     public function store(Request $request)
     {
       $blog = new Blog;
-
       $path = Storage::putFile('public', $request->file('images'));
       $url =Storage::url($path);
-
       $blog->image = $url;
       $blog->title = $request->title;
       $blog->content = $request->content;
       $blog->save();
-
       return redirect()->route('blogs_path');
     }
-
     /**
      * Display the specified resource.
      *
@@ -60,10 +52,8 @@ class BlogsController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
-
         return view('blogs.show', ['blog' => $blog]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -73,10 +63,8 @@ class BlogsController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
-
         return view('blogs.edit', ['blog' => $blog]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -90,10 +78,8 @@ class BlogsController extends Controller
         $blog->title = $request->title;
         $blog->content = $request->content;
         $blog->update();
-
         return redirect()->route('blog_path', ['blog' => $blog]);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -104,7 +90,6 @@ class BlogsController extends Controller
     {
         $blog = Blog::find($id);
         $blog->delete();
-
         return redirect()->route('blogs_path');
     }
 }

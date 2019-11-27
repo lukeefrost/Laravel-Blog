@@ -18,10 +18,11 @@
     <a href="{{route('edit_blog_path', ['blog' => $blog->id])}}" class="btn btn-outline-info">Edit</a>
     <a href="{{ route('blogs_path')}}" class="btn btn-outline-secondary">Back</a>
 
-      <form action="{{ route('delete_blog_path', ['blog' => $blog->id])}}">
-        <input type="hidden" name="_method" value="DELETE">
-        <button type="submit" class="btn btn-outline-danger">Delete</button>
-      </form>
+    <form action="{{ route('delete_blog_path', ['blog' => $blog->id])}}" value="POST">
+      @csrf
+      @method('DELETE')
+      <button type="submit" class="btn btn-outline-danger">Delete</button>
+    </form>
   </div>
 </div>
 
